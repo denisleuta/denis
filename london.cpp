@@ -4,7 +4,7 @@
 #include <vector>
 #include <algorithm>
 
-#pragma pack(1)
+#pragma pack(push, 1)
 
 // Определяю структуру для представления заголовка BMP
 struct BMPHeader {
@@ -27,7 +27,9 @@ struct BMPHeader {
 };
 
 #pragma pack(pop)
-
+/* Ты так и не сделал задачу с помощью класса с методами */
+/* В этой функции слишком много параметров. Следовало сделать структуру, которая
+ * объединяла бы некоторые из них */
 void ApplyFilter(const std::vector<unsigned char>& pixels, int width, int height, const double kernel[5][5], int radius, int x, int y, std::vector<unsigned char>& filteredPixels) {
     double sumR = 0.0, sumG = 0.0, sumB = 0.0;
 
@@ -141,7 +143,10 @@ int main() {
     // Чтаю заголовок BMP
     BMPHeader header;
     if (ReadBMPHeader("nose.bmp", header)) {
-
+        /* Такие вещи должны делать сами функции. Ты думаешь,
+         * пользователь твоей библиотеки будет у себя в main 
+         * это писать всё самостоятельно? Нужно предоставить 
+         * удобный интерфейс. */
         // Проверка на кратность 4
         long int width = header.width;
         long int height = header.height;
